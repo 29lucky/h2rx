@@ -7,22 +7,83 @@
     <title>All Stylish Slot Tables</title>
     <style>
         body {
-            background: #ff0000;
+            background: #000000;
             color: #672828;
             font-family: 'Segoe UI', sans-serif;
             padding: 20px;
             margin: 0;
             box-sizing: border-box;
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
             width: 100vw;
             min-height: 100vh;
         }
 
-        section {
-            flex: 1;
+        #mainContent {
+            display: none;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+        }
+
+        #pagePasswordForm {
+            display: flex;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #pagePasswordForm h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        #pagePasswordForm input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: 80%;
+        }
+
+        #pagePasswordForm button {
+            padding: 10px 20px;
+            background: #722f4b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #pagePasswordForm button:hover {
+            background: #e6005c;
+        }
+
+        #pagePasswordForm .password-toggle {
+            margin: 10px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        #pagePasswordForm .password-toggle input {
+            margin-right: 8px;
+        }
+
+        section niczym            flex: 1;
             min-width: 300px;
             margin-bottom: 80px;
         }
@@ -86,6 +147,7 @@
         .gradient-hover tr:hover {
             transform: scale(1.03);
             background: #000000;
+            cursor: pointer;
         }
 
         .gradient-hover tr {
@@ -165,67 +227,6 @@
 
         .gradient-hover tr:nth-child(10) {
             animation-delay: 0.5s;
-        }
-
-        .locked {
-            cursor: pointer;
-        }
-
-        .password-form {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .password-form input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-            width: 80%;
-        }
-
-        .password-form button {
-            padding: 10px 20px;
-            background: #722f4b;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        .password-form button:hover {
-            background: #e6005c;
-        }
-
-        .password-toggle {
-            margin: 10px;
-            color: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
-        .password-toggle input {
-            margin-right: 8px;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            color: #fff;
-            cursor: pointer;
         }
 
         .slot {
@@ -325,6 +326,10 @@
                 padding: 10px;
             }
 
+            #mainContent {
+                flex-direction: column;
+            }
+
             section,
             .slot-details-container,
             .all-slots-container {
@@ -358,16 +363,16 @@
                 font-size: 20px;
             }
 
-            .password-form {
+            #pagePasswordForm {
                 width: 95%;
                 padding: 15px;
             }
 
-            .password-form input {
+            #pagePasswordForm input {
                 font-size: 14px;
             }
 
-            .password-form button {
+            #pagePasswordForm button {
                 font-size: 14px;
                 padding: 8px 16px;
             }
@@ -381,343 +386,363 @@
 </head>
 
 <body>
-    <section>
-        <h2>🔵Time</h2>
-        <div class="gradient-hover">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Slot</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="slotTable">
-                    <tr class="locked" data-slot="1">
-                        <td style="color:#ff7675;">1️⃣</td>
-                        <td style="color:#74b9ff;">12:00 AM – 2:30 AM</td>
-                        <td style="color:#55efc4;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="2">
-                        <td style="color:#ffeaa7;">2️⃣</td>
-                        <td style="color:#a29bfe;">2:30 AM – 5:00 AM</td>
-                        <td style="color:#fab1a0;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="3">
-                        <td style="color:#81ecec;">3️⃣</td>
-                        <td style="color:#fd79a8;">5:00 AM – 7:30 AM</td>
-                        <td style="color:#ffeaa7;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="4">
-                        <td style="color:#dfe6e9;">4️⃣</td>
-                        <td style="color:#e17055;">7:30 AM – 10:00 AM</td>
-                        <td style="color:#00cec9;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="5">
-                        <td style="color:#00b894;">5️⃣</td>
-                        <td style="color:#fdcb6e;">10:00 AM – 12:30 PM</td>
-                        <td style="color:#6c5ce7;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="6">
-                        <td style="color:#a29bfe;">6️⃣</td>
-                        <td style="color:#fab1a0;">12:30 PM – 3:00 PM</td>
-                        <td style="color:#81ecec;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="7">
-                        <td style="color:#ffeaa7;">7️⃣</td>
-                        <td style="color:#74b9ff;">3:00 PM – 5:30 PM</td>
-                        <td style="color:#55efc4;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="8">
-                        <td style="color:#fd79a8;">8️⃣</td>
-                        <td style="color:#00cec9;">5:30 PM – 8:00 PM</td>
-                        <td style="color:#fab1a0;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="9">
-                        <td style="color:#55efc4;">9️⃣</td>
-                        <td style="color:#e17055;">8:00 PM – 10:30 PM</td>
-                        <td style="color:#fdcb6e;">2.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                    <tr class="locked" data-slot="10">
-                        <td style="color:#dfe6e9;">🔟</td>
-                        <td style="color:#a29bfe;">10:30 PM – 12:00 AM</td>
-                        <td style="color:#00b894;">1.5 hr</td>
-                        <td><span class="lock-icon">🔒</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <button class="view-all-button" onclick="viewAllSlots()"></button>
-    </section>
-
-    <div class="slot-details-container" id="slotDetailsContainer">
-        <div class="slot" data-slot="1">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕐 Slot 1</h1>
-            <h2>12:00 AM – 2:30 AM → Middle: 1:15 AM</h2>
-            <ul>
-                <li class="g1">Sleep</li>
-                <li class="g2">Coding</li>
-                <li class="g3">Notes Study</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="2">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕑 Slot 2</h1>
-            <h2>2:30 AM – 5:00 AM → Middle: 3:45 AM</h2>
-            <ul>
-                <li class="g4">Wake Up</li>
-                <li class="g5">Meditate</li>
-                <li class="g6">Sancturp</li>
-                <li class="g7">Fresh</li>
-                <li class="g8">Coding</li>
-                <li class="g1">Notes</li>
-                <li class="g2">Book Read</li>
-                <li class="g3">Make Notes</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="3">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕒 Slot 3</h1>
-            <h2>5:00 AM – 7:30 AM → Middle: 6:15 AM</h2>
-            <ul>
-                <li class="g4">Wake Up</li>
-                <li class="g5">Meditate</li>
-                <li class="g6">Sancturp</li>
-                <li class="g7">Fresh</li>
-                <li class="g8">Library</li>
-                <li class="g1">Coding</li>
-                <li class="g2">Study</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="4">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕓 Slot 4</h1>
-            <h2>7:30 AM – 10:00 AM → Middle: 8:45 AM</h2>
-            <ul>
-                <li class="g3">Wake Up, Fresh</li>
-                <li class="g4">Sancturp</li>
-                <li class="g5">Breakfast</li>
-                <li class="g6">Library</li>
-                <li class="g7">GS Paper 1</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="5">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕔 Slot 5</h1>
-            <h2>10:00 AM – 12:30 PM → Middle: 11:15 AM</h2>
-            <ul>
-                <li class="g8">History</li>
-                <li class="g1">Coding</li>
-                <li class="g2">Brake Nap</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="6">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕕 Slot 6</h1>
-            <h2>12:30 PM – 3:00 PM → Middle: 1:45 PM</h2>
-            <ul>
-                <li class="g3">History</li>
-                <li class="g4">Geo</li>
-                <li class="g5">Science</li>
-                <li class="g6">Nap Coding</li>
-                <li class="g7">Lunch</li>
-                <li class="g8">Other Work</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="7">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕖 Slot 7</h1>
-            <h2>3:00 PM – 5:30 PM → Middle: 4:15 PM</h2>
-            <ul>
-                <li class="g1">International Relation</li>
-                <li class="g2">Nap</li>
-                <li class="g3">Coding</li>
-                <li class="g4">Brake</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="8">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕗 Slot 8</h1>
-            <h2>5:30 PM – 8:00 PM → Middle: 6:45 PM</h2>
-            <ul>
-                <li class="g5">Economics</li>
-                <li class="g6">Modern History</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="9">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕘 Slot 9</h1>
-            <h2>8:00 PM – 10:30 PM → Middle: 9:15 PM</h2>
-            <ul>
-                <li class="g7">Coding</li>
-                <li class="g8">Sleep</li>
-                <li class="g1">Study Book Read</li>
-                <li class="g2">Plan Next Page</li>
-                <li class="g3">Work</li>
-            </ul>
-        </div>
-        <div class="slot" data-slot="10">
-            <span class="close-button" onclick="closeDetails()">✖</span>
-            <h1>🕙 Slot 10</h1>
-            <h2>10:30 PM – 12:00 AM → Middle: 11:15 PM</h2>
-            <ul>
-                <li class="g4">Sleep</li>
-                <li class="g5">Study</li>
-                <li class="g6">Work</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="all-slots-container" id="allSlotsContainer">
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕐 Slot 1</h1>
-            <h2>12:00 AM – 2:30 AM → Middle: 1:15 AM</h2>
-            <ul>
-                <li class="g1">Sleep</li>
-                <li class="g2">Coding</li>
-                <li class="g3">Notes Study</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕑 Slot 2</h1>
-            <h2>2:30 AM – 5:00 AM → Middle: 3:45 AM</h2>
-            <ul>
-                <li class="g4">Wake Up</li>
-                <li class="g5">Meditate</li>
-                <li class="g6">Sancturp</li>
-                <li class="g7">Fresh</li>
-                <li class="g8">Coding</li>
-                <li class="g1">Notes</li>
-                <li class="g2">Book Read</li>
-                <li class="g3">Make Notes</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕒 Slot 3</h1>
-            <h2>5:00 AM – 7:30 AM → Middle: 6:15 AM</h2>
-            <ul>
-                <li class="g4">Wake Up</li>
-                <li class="g5">Meditate</li>
-                <li class="g6">Sancturp</li>
-                <li class="g7">Fresh</li>
-                <li class="g8">Library</li>
-                <li class="g1">Coding</li>
-                <li class="g2">Study</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕓 Slot 4</h1>
-            <h2>7:30 AM – 10:00 AM → Middle: 8:45 AM</h2>
-            <ul>
-                <li class="g3">Wake Up, Fresh</li>
-                <li class="g4">Sancturp</li>
-                <li class="g5">Breakfast</li>
-                <li class="g6">Library</li>
-                <li class="g7">GS Paper 1</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕔 Slot 5</h1>
-            <h2>10:00 AM – 12:30 PM → Middle: 11:15 AM</h2>
-            <ul>
-                <li class="g8">History</li>
-                <li class="g1">Coding</li>
-                <li class="g2">Brake Nap</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕕 Slot 6</h1>
-            <h2>12:30 PM – 3:00 PM → Middle: 1:45 PM</h2>
-            <ul>
-                <li class="g3">History</li>
-                <li class="g4">Geo</li>
-                <li class="g5">Science</li>
-                <li class="g6">Nap Coding</li>
-                <li class="g7">Lunch</li>
-                <li class="g8">Other Work</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕖 Slot 7</h1>
-            <h2>3:00 PM – 5:30 PM → Middle: 4:15 PM</h2>
-            <ul>
-                <li class="g1">International Relation</li>
-                <li class="g2">Nap</li>
-                <li class="g3">Coding</li>
-                <li class="g4">Brake</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕗 Slot 8</h1>
-            <h2>5:30 PM – 8:00 PM → Middle: 6:45 PM</h2>
-            <ul>
-                <li class="g5">Economics</li>
-                <li class="g6">Modern History</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕘 Slot 9</h1>
-            <h2>8:00 PM – 10:30 PM → Middle: 9:15 PM</h2>
-            <ul>
-                <li class="g7">Coding</li>
-                <li class="g8">Sleep</li>
-                <li class="g1">Study Book Read</li>
-                <li class="g2">Plan Next Page</li>
-                <li class="g3">Work</li>
-            </ul>
-        </div>
-        <div class="slot">
-            <span class="close-button" onclick="closeAllSlots()">✖</span>
-            <h1>🕙 Slot 10</h1>
-            <h2>10:30 PM – 12:00 AM → Middle: 11:15 PM</h2>
-            <ul>
-                <li class="g4">Sleep</li>
-                <li class="g5">Study</li>
-                <li class="g6">Work</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="password-form" id="passwordForm">
-        <h3>Enter Password for Slot <span id="slotNumber"></span></h3>
-        <input type="password" id="passwordInput" placeholder="Password">
+    <div class="password-form" id="pagePasswordForm">
+        <h3>Enter Password to Access Page</h3>
+        <input type="password" id="pagePasswordInput" placeholder="Password">
         <label class="password-toggle">
-            <input type="checkbox" onclick="togglePassword()"> Show Password
+            <input type="checkbox" onclick="togglePagePassword()"> Show Password
         </label>
-        <button onclick="validatePassword()">Unlock</button>
+        <button onclick="validatePagePassword()">Unlock Page</button>
+    </div>
+
+    <div id="mainContent">
+        <section>
+            <h2>🔵Time</h2>
+            <div class="gradient-hover">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Slot</th>
+                            <th>Time</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="slotTable">
+                        <tr data-slot="1">
+                            <td style="color:#ff7675;">1️⃣</td>
+                            <td style="color:#74b9ff;">12:00 AM – 2:30 AM</td>
+                            <td style="color:#55efc4;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="2">
+                            <td style="color:#ffeaa7;">2️⃣</td>
+                            <td style="color:#a29bfe;">2:30 AM – 5:00 AM</td>
+                            <td style="color:#fab1a0;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="3">
+                            <td style="color:#81ecec;">3️⃣</td>
+                            <td style="color:#fd79a8;">5:00 AM – 7:30 AM</td>
+                            <td style="color:#ffeaa7;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="4">
+                            <td style="color:#dfe6e9;">4️⃣</td>
+                            <td style="color:#e17055;">7:30 AM – 10:00 AM</td>
+                            <td style="color:#00cec9;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="5">
+                            <td style="color:#00b894;">5️⃣</td>
+                            <td style="color:#fdcb6e;">10:00 AM – 12:30 PM</td>
+                            <td style="color:#6c5ce7;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="6">
+                            <td style="color:#a29bfe;">6️⃣</td>
+                            <td style="color:#fab1a0;">12:30 PM – 3:00 PM</td>
+                            <td style="color:#81ecec;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="7">
+                            <td style="color:#ffeaa7;">7️⃣</td>
+                            <td style="color:#74b9ff;">3:00 PM – 5:30 PM</td>
+                            <td style="color:#55efc4;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="8">
+                            <td style="color:#fd79a8;">8️⃣</td>
+                            <td style="color:#00cec9;">5:30 PM – 8:00 PM</td>
+                            <td style="color:#fab1a0;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="9">
+                            <td style="color:#55efc4;">9️⃣</td>
+                            <td style="color:#e17055;">8:00 PM – 10:30 PM</td>
+                            <td style="color:#fdcb6e;">2.5 hr</td>
+                        </tr>
+                        <tr data-slot="10">
+                            <td style="color:#dfe6e9;">🔟</td>
+                            <td style="color:#a29bfe;">10:30 PM – 12:00 AM</td>
+                            <td style="color:#00b894;">1.5 hr</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="view-all-button" onclick="viewAllSlots()">View All Slots</button>
+        </section>
+
+        <div class="slot-details-container" id="slotDetailsContainer">
+            <div class="slot" data-slot="1">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕐 Slot 1</h1>
+                <h2>12:00 AM – 2:30 AM → Middle: 1:15 AM</h2>
+                <ul>
+                    <li class="g1">Sleep</li>
+                    <li class="g2">Coding</li>
+                    <li class="g3">Notes Study</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="2">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕑 Slot 2</h1>
+                <h2>2:30 AM – 5:00 AM → Middle: 3:45 AM</h2>
+                <ul>
+                    <li class="g4">Wake Up</li>
+                    <li class="g5">Meditate</li>
+                    <li class="g6">Sancturp</li>
+                    <li class="g7">Fresh</li>
+                    <li class="g8">Coding</li>
+                    <li class="g1">Notes</li>
+                    <li class="g2">Book Read</li>
+                    <li class="g3">Make Notes</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="3">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕒 Slot 3</h1>
+                <h2>5:00 AM – 7:30 AM → Middle: 6:15 AM</h2>
+                <ul>
+                    <li class="g4">Wake Up</li>
+                    <li class="g5">Meditate</li>
+                    <li class="g6">Sancturp</li>
+                    <li class="g7">Fresh</li>
+                    <li class="g8">Library</li>
+                    <li class="g1">Coding</li>
+                    <li class="g2">Study</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="4">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕓 Slot 4</h1>
+                <h2>7:30 AM – 10:00 AM → Middle: 8:45 AM</h2>
+                <ul>
+                    <li class="g3">Wake Up, Fresh</li>
+                    <li class="g4">Sancturp</li>
+                    <li class="g5">Breakfast</li>
+                    <li class="g6">Library</li>
+                    <li class="g7">GS Paper 1</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="5">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕔 Slot 5</h1>
+                <h2>10:00 AM – 12:30 PM → Middle: 11:15 AM</h2>
+                <ul>
+                    <li class="g8">History</li>
+                    <li class="g1">Coding</li>
+                    <li class="g2">Brake Nap</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="6">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕕 Slot 6</h1>
+                <h2>12:30 PM – 3:00 PM → Middle: 1:45 PM</h2>
+                <ul>
+                    <li class="g3">History</li>
+                    <li class="g4">Geo</li>
+                    <li class="g5">Science</li>
+                    <li class="g6">Nap Coding</li>
+                    <li class="g7">Lunch</li>
+                    <li class="g8">Other Work</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="7">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕖 Slot 7</h1>
+                <h2>3:00 PM – 5:30 PM → Middle: 4:15 PM</h2>
+                <ul>
+                    <li class="g1">International Relation</li>
+                    <li class="g2">Nap</li>
+                    <li class="g3">Coding</li>
+                    <li class="g4">Brake</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="8">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕗 Slot 8</h1>
+                <h2>5:30 PM – 8:00 PM → Middle: 6:45 PM</h2>
+                <ul>
+                    <li class="g5">Economics</li>
+                    <li class="g6">Modern History</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="9">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕘 Slot 9</h1>
+                <h2>8:00 PM – 10:30 PM → Middle: 9:15 PM</h2>
+                <ul>
+                    <li class="g7">Coding</li>
+                    <li class="g8">Sleep</li>
+                    <li class="g1">Study Book Read</li>
+                    <li class="g2">Plan Next Page</li>
+                    <li class="g3">Work</li>
+                </ul>
+            </div>
+            <div class="slot" data-slot="10">
+                <span class="close-button" onclick="closeDetails()">✖</span>
+                <h1>🕙 Slot 10</h1>
+                <h2>10:30 PM – 12:00 AM → Middle: 11:15 PM</h2>
+                <ul>
+                    <li class="g4">Sleep</li>
+                    <li class="g5">Study</li>
+                    <li class="g6">Work</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="all-slots-container" id="allSlotsContainer">
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕐 Slot 1</h1>
+                <h2>12:00 AM – 2:30 AM → Middle: 1:15 AM</h2>
+                <ul>
+                    <li class="g1">Sleep</li>
+                    <li class="g2">Coding</li>
+                    <li class="g3">Notes Study</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕑 Slot 2</h1>
+                <h2>2:30 AM – 5:00 AM → Middle: 3:45 AM</h2>
+                <ul>
+                    <li class="g4">Wake Up</li>
+                    <li class="g5">Meditate</li>
+                    <li class="g6">Sancturp</li>
+                    <li class="g7">Fresh</li>
+                    <li class="g8">Coding</li>
+                    <li class="g1">Notes</li>
+                    <li class="g2">Book Read</li>
+                    <li class="g3">Make Notes</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕒 Slot 3</h1>
+                <h2>5:00 AM – 7:30 AM → Middle: 6:15 AM</h2>
+                <ul>
+                    <li class="g4">Wake Up</li>
+                    <li class="g5">Meditate</li>
+                    <li class="g6">Sancturp</li>
+                    <li class="g7">Fresh</li>
+                    <li class="g8">Library</li>
+                    <li class="g1">Coding</li>
+                    <li class="g2">Study</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕓 Slot 4</h1>
+                <h2>7:30 AM – 10:00 AM → Middle: 8:45 AM</h2>
+                <ul>
+                    <li class="g3">Wake Up, Fresh</li>
+                    <li class="g4">Sancturp</li>
+                    <li class="g5">Breakfast</li>
+                    <li class="g6">Library</li>
+                    <li class="g7">GS Paper 1</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕔 Slot 5</h1>
+                <h2>10:00 AM – 12:30 PM → Middle: 11:15 AM</h2>
+                <ul>
+                    <li class="g8">History</li>
+                    <li class="g1">Coding</li>
+                    <li class="g2">Brake Nap</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕕 Slot 6</h1>
+                <h2>12:30 PM – 3:00 PM → Middle: 1:45 PM</h2>
+                <ul>
+                    <li class="g3">History</li>
+                    <li class="g4">Geo</li>
+                    <li class="g5">Science</li>
+                    <li class="g6">Nap Coding</li>
+                    <li class="g7">Lunch</li>
+                    <li class="g8">Other Work</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕖 Slot 7</h1>
+                <h2>3:00 PM – 5:30 PM → Middle: 4stu            <ul>
+                    <li class="g1">International Relation</li>
+                    <li class="g2">Nap</li>
+                    <li class="g3">Coding</li>
+                    <li class="g4">Brake</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕗 Slot 8</h1>
+                <h2>5:30 PM – 8:00 PM → Middle: 6:45 PM</h2>
+                <ul>
+                    <li class="g5">Economics</li>
+                    <li class="g6">Modern History</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕘 Slot 9</h1>
+                <h2>8:00 PM – 10:30 PM → Middle: 9:15 PM</h2>
+                <ul>
+                    <li class="g7">Coding</li>
+                    <li class="g8">Sleep</li>
+                    <li class="g1">Study Book Read</li>
+                    <li class="g2">Plan Next Page</li>
+                    <li class="g3">Work</li>
+                </ul>
+            </div>
+            <div class="slot">
+                <span class="close-button" onclick="closeAllSlots()">✖</span>
+                <h1>🕙 Slot 10</h1>
+                <h2>10:30 PM – 12:00 AM → Middle: 11:15 PM</h2>
+                <ul>
+                    <li class="g4">Sleep</li>
+                    <li class="g5">Study</li>
+                    <li class="g6">Work</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
-        const validPasswords = ["lucky@265", "raj@265", "yadav@265"];
+        const validPagePassword = "77";
         let currentSlot = null;
         let lastHoveredRow = null;
 
-        document.querySelectorAll('.locked').forEach(row => {
+        // Show page password form on load
+        document.getElementById('pagePasswordForm').style.display = 'flex';
+        document.getElementById('pagePasswordInput').focus();
+
+        function togglePagePassword() {
+            const passwordInput = document.getElementById('pagePasswordInput');
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+
+        function validatePagePassword() {
+            const password = document.getElementById('pagePasswordInput').value;
+            if (password === validPagePassword) {
+                document.getElementById('pagePasswordForm').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'flex';
+                document.getElementById('pagePasswordInput').value = '';
+            } else {
+                alert('Incorrect page password!');
+                document.getElementById('pagePasswordInput').value = '';
+            }
+        }
+
+        document.getElementById('pagePasswordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                validatePagePassword();
+            }
+        });
+
+        document.querySelectorAll('#slotTable tr').forEach(row => {
             row.addEventListener('click', () => {
                 currentSlot = row.getAttribute('data-slot');
-                document.getElementById('slotNumber').textContent = currentSlot;
-                document.getElementById('passwordForm').style.display = 'block';
-                document.getElementById('passwordInput').focus();
+                const slotDetailsContainer = document.getElementById('slotDetailsContainer');
+                slotDetailsContainer.style.display = 'flex';
+                document.getElementById('allSlotsContainer').style.display = 'none';
+                document.querySelectorAll('.slot').forEach(slot => {
+                    slot.style.display = slot.getAttribute('data-slot') === currentSlot ? 'block' : 'none';
+                });
             });
 
             row.addEventListener('mouseenter', () => {
@@ -737,32 +762,6 @@
             });
         });
 
-        function togglePassword() {
-            const passwordInput = document.getElementById('passwordInput');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
-            }
-        }
-
-        function validatePassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (validPasswords.includes(password)) {
-                const slotDetailsContainer = document.getElementById('slotDetailsContainer');
-                slotDetailsContainer.style.display = 'flex';
-                document.getElementById('allSlotsContainer').style.display = 'none';
-                document.querySelectorAll('.slot').forEach(slot => {
-                    slot.style.display = slot.getAttribute('data-slot') === currentSlot ? 'block' : 'none';
-                });
-                document.getElementById('passwordForm').style.display = 'none';
-                document.getElementById('passwordInput').value = '';
-            } else {
-                alert('Incorrect password!');
-                document.getElementById('passwordInput').value = '';
-            }
-        }
-
         function closeDetails() {
             document.getElementById('slotDetailsContainer').style.display = 'none';
         }
@@ -770,18 +769,11 @@
         function viewAllSlots() {
             document.getElementById('allSlotsContainer').style.display = 'flex';
             document.getElementById('slotDetailsContainer').style.display = 'none';
-            document.getElementById('passwordForm').style.display = 'none';
         }
 
         function closeAllSlots() {
             document.getElementById('allSlotsContainer').style.display = 'none';
         }
-
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                validatePassword();
-            }
-        });
     </script>
 </body>
 
